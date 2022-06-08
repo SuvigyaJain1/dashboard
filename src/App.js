@@ -3,17 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Dashboard from './components/Dashboard/Dashboard';
 import LoginPage from './components/Login/LoginPage';
-import AuthProvider from './AuthProvider';
+import AuthProvider from './Authentication';
+import { RequireAuth } from './Authentication';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Routes,
   Route,
-  Link,
-  useNavigate,
-  useLocation,
-  Navigate,
-  Outlet,
 } from "react-router-dom";
 
 let App = () => {
@@ -32,8 +28,5 @@ let App = () => {
     </AuthProvider>
   );
 }
-
-let AuthContext = React.createContext(null);
-
 
 export default App;

@@ -1,7 +1,7 @@
 import React from 'react'
 import LoginForm from './LoginForm'
 import Card from '../Card/Card'
-import './Login.scss'
+import '../../styles/Login.scss'
 
 export default function LoginPage() {
   return (

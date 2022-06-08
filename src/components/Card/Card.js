@@ -1,5 +1,5 @@
 import React from 'react'
-import './Card.scss'
+import '../../styles/Card.scss'
 
 export default function Card (props) {
   return (
