@@ -1,40 +1,47 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, ReactNode, Dispatch, SetStateAction, ReactElement } from 'react'
 import { useLocation, Navigate } from 'react-router';
 import { fakeAuthProvider } from './auth';
 
-let AuthContext = React.createContext(null);
+export interface AuthContextType {
+    user: string | undefined;
+    signin: (user: string, callback: VoidFunction) => void;
+    signout: (callback: VoidFunction) => void;
+};
 
-export function useAuth() {
+let AuthContext : React.Context<AuthContextType> = React.createContext<AuthContextType>(null!);
+
+
+export function useAuth(): AuthContextType {
   return useContext(AuthContext);
 }
 
-export default function AuthProvider( { children } ) {
+export default function AuthProvider( { children }: {children: ReactNode} ): ReactElement {
     /*
      * Passes Auth related data and methods - user, signin() and signout() to children
      * via Context
      */
-    const [user, setUser] = useState();
+    const [user, setUser] = useState<string|undefined>(undefined);
 
-    let signin = (newUser, callback) => {
+    let signin = (newUser: string, callback: VoidFunction): void => {
         return fakeAuthProvider.signin(() => {
             setUser(newUser);
             callback();
         })
     };
 
-    let signout = (newUser, callback) => {
+    let signout = (callback: VoidFunction): void => {
         return fakeAuthProvider.signout(() => {
-            setUser(null);
+            setUser(undefined);
             callback();
         });
     };
 
-    let value = {user, signin, signout};
+    let value: AuthContextType = {user, signin, signout};
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 };
 
-export function RequireAuth ({ children }) {
+export function RequireAuth ({ children }: { children: ReactNode }) : ReactElement {
 
     /**
      * Checks authentication status of user. 
@@ -49,7 +56,7 @@ export function RequireAuth ({ children }) {
         return <Navigate to='/login' state={{ from: location }} replace />;
     }
 
-    return children;
+    return <>{children}</>;
 }
 
 

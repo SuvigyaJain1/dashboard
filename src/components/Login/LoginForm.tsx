@@ -1,19 +1,25 @@
-import React, { useState } from 'react'
+import userEvent from '@testing-library/user-event';
+import React, { ReactElement } from 'react'
 import { Button, Form, ListGroup } from 'react-bootstrap'
-import { Navigate, useLocation, useNavigate } from 'react-router';
-import { useAuth } from '../../Authentication';
+import { Location, NavigateFunction, To, useLocation, useNavigate } from 'react-router';
+import { AuthContextType, useAuth } from '../../Auth/Authentication';
 
-function LoginForm() {
-    const navigate = useNavigate();
-    const auth = useAuth();
-    let location = useLocation();
-    let from = location.state.from.pathname || '/';
+function LoginForm(): ReactElement {
 
-    const submitHandler = e => {
+    interface stateType {
+        from: { pathname: string }
+    }  
+
+    const navigate: NavigateFunction = useNavigate();
+    const auth: AuthContextType = useAuth();
+    let location: Location = useLocation();
+    let from : To = (location.state as stateType).from.pathname || '/';
+
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget);
-        let email = formData.get("email");
+        let email = formData.get("email") as string;
 
         auth.signin(email, () => {
             navigate(from, { replace: true });

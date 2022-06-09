@@ -1,10 +1,10 @@
-import React from 'react'
-import { Accordion, Nav, NavbarBrand } from 'react-bootstrap'
+import React, { ReactElement } from 'react'
+import { Accordion, NavbarBrand } from 'react-bootstrap'
+import NavMenu from './NavMenu'
 
-import NavMenu from '../SideNav/NavMenu'
 
 
-function Sidebar() {
+function Sidebar(): ReactElement {
   return (
     <div className='navbar-dark'>
         <Accordion className='accordion-dark navbar-nav' defaultActiveKey={"Menu"}>

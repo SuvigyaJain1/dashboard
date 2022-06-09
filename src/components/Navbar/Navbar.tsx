@@ -1,7 +1,7 @@
-import React from 'react'
-import { Navbar, Container, Form, Button } from 'react-bootstrap'
+import React, { ReactElement } from 'react'
+import { Button, Container, Form, Navbar } from 'react-bootstrap'
 
-export default function NavBar() {
+export default function NavBar(): ReactElement {
   return (
     <>
       <Navbar bg="dark" variant="dark" collapseOnSelect expand="bg" className='navbar-top'>

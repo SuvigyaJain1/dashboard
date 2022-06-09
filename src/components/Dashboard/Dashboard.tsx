@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import NavBar from '../Navbar/Navbar'
 import Sidebar from '../SideNav/SideNav'
@@ -6,7 +6,7 @@ import DashboardContent from './DashboardContent'
 
 import '../../styles/Dashboard.scss';
 
-function Dashboard() {
+function Dashboard() : ReactElement {
   return (
     <div className='container-fluid row page'>
       <div className='col-md-3 col-bg-3 col-sm-12 sidebar'>

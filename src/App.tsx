@@ -3,10 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Dashboard from './components/Dashboard/Dashboard';
 import LoginPage from './components/Login/LoginPage';
-import AuthProvider from './Authentication';
-import { RequireAuth } from './Authentication';
+import AuthProvider from './Auth/Authentication';
+import { RequireAuth } from './Auth/Authentication';
 
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import {
   Routes,
   Route,
@@ -18,9 +18,9 @@ let App = () => {
     <AuthProvider>
       <Routes>
         <Route path='/' element = { 
-          // <RequireAuth>
+          <RequireAuth>
             <Dashboard />
-          // </RequireAuth>
+          </RequireAuth>
         } />
         <Route path='/login' element={<LoginPage />} />
       </Routes>

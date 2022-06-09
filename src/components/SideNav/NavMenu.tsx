@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { Accordion } from 'react-bootstrap';
 
-function NavMenu({ title, children, }) {
-    const id = "accordionSideNavItem"+title;
-    console.log(id);
+function NavMenu({ title, children, }: {title: string; children: ReactNode}) {
+  const id = "accordionSideNavItem"+title;
+
   return (
     <Accordion.Item className='nav-menu' eventKey={title}>
-        <Accordion.Header className='menu-title' variant='white'>
+        <Accordion.Header className='menu-title'>
             {title}
         </Accordion.Header>
         <Accordion.Body className='' id={id}>
