@@ -17,13 +17,12 @@ let App = () => {
   return (
     <AuthProvider>
       <Routes>
-        <Route path='/' element={<LoginPage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/home' element = { 
-          <RequireAuth>
+        <Route path='/' element = { 
+          // <RequireAuth>
             <Dashboard />
-          </RequireAuth>
+          // </RequireAuth>
         } />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
     </AuthProvider>
   );

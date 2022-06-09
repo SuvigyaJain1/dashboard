@@ -1,0 +1,127 @@
+@import './Main';
+
+$sidenav-bg : $primary ;
+$navbar-bg : #e3e0e0;
+$dashboard-bg : #ffffff; 
+
+
+.page {
+    min-height: 100%;
+    position: fixed;
+    overflow-x: hidden;
+    margin: 0px !important;
+    padding: 0px !important;
+
+    .right {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .nav {
+        height: 10%; 
+        background-color: $navbar-bg;  
+    }
+
+    .dashboard {
+        height: 85%;
+        background-color: $dashboard-bg;
+    }
+
+    .sidebar {
+        background-color: $sidenav-bg;
+        color: blanchedalmond;
+
+        .navbar-nav {
+            width: 100%;
+            padding: 0px;
+            border:none;
+        }
+
+        .accordion-item {
+            border: none;
+        }
+
+        .menu-title {
+            font-family: 'Lalezar', cursive;  
+            font-weight: 200;
+        }
+
+        .navbar-brand {
+            font-family: 'Lalezar', bold;
+            display: flex;
+            font-weight: 500;
+            justify-content: center;
+            margin: 1em;
+            font-size: 1.5em;
+
+        }
+
+        .navbar-nav, .nav-menu, .menu-title, button, .menu-title::after {
+            background-color: inherit;
+            color: inherit;
+
+        }
+
+        ul {
+            list-style:none;  
+        }
+
+        li {
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            &:hover {
+                background-color: $secondary;
+            }
+        }
+
+    }
+
+    .navbar {
+        width: 100%;
+    }
+
+    .navbar-bottom {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0px;
+
+        img {
+            border-radius: 50%;
+            height: 2em;
+            margin: 0em 1em;
+        }
+
+        .nav-profile, .nav-icons {
+            display: flex;
+            max-width: 50%;
+            flex-flow: row;
+            text-align: left;
+            justify-content: flex-start;
+            padding: 0.3em 2em;
+        }
+
+        .nav-profile-name {
+            flex-direction: column;
+            font-size: small;
+            align-content: center;
+            p{
+                align-items: center;
+                margin: 0em 1em;
+            }
+        }
+
+        .nav-icons {
+            justify-content: end;
+
+            i {
+                margin: 1em;
+            }
+        }
+    }
+
+
+}
+
+
