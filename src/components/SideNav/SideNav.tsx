@@ -12,8 +12,8 @@ function SubMenu({item}: {item: MenuItem}): ReactElement {
         </Accordion.Header>
         <Accordion.Body>
           <ul className='menu-list'>
-            {item.children.map(child => 
-              <li key={child.key}>
+            {item.children.map((child, index) => 
+              <li key={index}>
                 {(child.children.length == 0)?
                   <span className='menu-item'>{child.title}</span>
                 :(
@@ -40,8 +40,8 @@ function Sidebar({items}: {items: MenuItem[]}): ReactElement {
 
           <Accordion.Body>
             <ul className='menu-list'>
-              {items.map(item => 
-                <li key={item.key}>
+              {items.map((item, index) => 
+                <li key={index}>
                   {(item.children.length == 0)?
                     <span className='menu-item'>{item.title}</span>
                   :(

@@ -11,49 +11,39 @@ function Dashboard() : ReactElement {
   const items: MenuItem[] = [
     {
       title: "Item1",
-      key: "1",
       children: [
         {
           title: "Item1.1",
-          key: "1.1",
           children: []
         },{
           title: "Item1.2",
-          key: "1.2",
           children: []
         },
       ]
     },{
       title: "Item2",
-      key: "2",
       children: [
         {
           title: "Item2.1",
-          key: "2.1",
           children: []
         },{
           title: "Item2.2",
-          key: "2.2",
           children: [
             {
               title: "Item2.2.1",
-              key: "2.2.1",
               children: []
             },{
               title: "Item2.2.2",
-              key: "2.2.2",
               children: []
             },
           ]
         },{
           title: "Item2.3",
-          key: "2.3",
           children: []
         },
       ]
     },{
       title: "Item3",
-      key: "3",
       children: []
     },
   ]; 
