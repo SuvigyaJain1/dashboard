@@ -1,42 +1,59 @@
 import React, { ReactElement } from 'react'
-import { Accordion, NavbarBrand } from 'react-bootstrap'
-import NavMenu from './NavMenu'
+import { Accordion } from 'react-bootstrap'
+import MenuItem from './MenuItem'
 
 
+function SubMenu({item}: {item: MenuItem}): ReactElement {
+  return (
+    <Accordion className='accordion-dark navbar-nav' alwaysOpen flush>
+      <Accordion.Item eventKey={"_parent"+item.title} className='nav-menu'>
+        <Accordion.Header className='menu-title'>
+          {item.title}
+        </Accordion.Header>
+        <Accordion.Body>
+          <ul className='menu-list'>
+            {item.children.map(child => 
+              <li key={child.key}>
+                {(child.children.length == 0)?
+                  <span className='menu-item'>{child.title}</span>
+                :(
+                  <SubMenu item={child}></SubMenu>
+                )}
+              </li>
+            )}
+          </ul>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+  );
+}
 
-function Sidebar(): ReactElement {
+function Sidebar({items}: {items: MenuItem[]}): ReactElement {
   return (
     <div className='navbar-dark'>
-        <Accordion className='accordion-dark navbar-nav' defaultActiveKey={"Menu"}>
-          <NavbarBrand>Brand Name</NavbarBrand> 
-          <NavMenu title='Menu' key='1'> 
-            <ul className="menu-list">
-              <li className='menu-item'> Dashboard <i className='bi bi-house'></i> </li>
-              <li className='menu-item'> Calendar <i className='bi bi-calendar'></i></li>
-              <li className='menu-item'> Projects <i className='bi bi-journal-text'></i></li>
-              <li className='menu-item'> Tasks <i className='bi bi-card-list'></i></li>
-              <li className='menu-item'> Invoices <i className='bi bi-receipt'></i></li>
+        <Accordion className='accordion-dark navbar-nav' alwaysOpen defaultActiveKey={"_parent"} flush>
+          <Accordion.Item eventKey="_parent" className='nav-menu'>
+
+          <Accordion.Header style={{"display":"none"}}>
+            <h2>Heading</h2>
+          </Accordion.Header>
+
+          <Accordion.Body>
+            <ul className='menu-list'>
+              {items.map(item => 
+                <li key={item.key}>
+                  {(item.children.length == 0)?
+                    <span className='menu-item'>{item.title}</span>
+                  :(
+                    <SubMenu item={item}></SubMenu>
+                  )}
+                </li>
+              )}
             </ul>
-          </NavMenu>
-          <NavMenu title='Components' key='2'> 
-            <ul className="menu-list">
-              <li className='menu-item'> Dashboard </li>
-              <li className='menu-item'> Calendar </li>
-              <li className='menu-item'> Projects </li>
-              <li className='menu-item'> Tasks </li>
-              <li className='menu-item'> Invoices </li>
-            </ul>
-          </NavMenu>
-          <NavMenu title='Pages' key='3'>
-            <ul className="menu-list">
-              <li className='menu-item'> Dashboard </li>
-              <li className='menu-item'> Calendar </li>
-              <li className='menu-item'> Projects </li>
-              <li className='menu-item'> Tasks </li>
-              <li className='menu-item'> Invoices </li>
-            </ul>
-          </NavMenu>
-        </Accordion>
+          </Accordion.Body>
+
+        </Accordion.Item>
+      </Accordion>
     </div>
   )
 }
