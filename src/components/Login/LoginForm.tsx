@@ -3,6 +3,8 @@ import React, { ReactElement } from 'react'
 import { Button, Form, ListGroup } from 'react-bootstrap'
 import { Location, NavigateFunction, To, useLocation, useNavigate } from 'react-router';
 import { AuthContextType, useAuth } from '../../Auth/Authentication';
+import { Formik, FormikConfig, useFormik } from 'formik';
+
 
 function LoginForm(): ReactElement {
 
@@ -15,18 +17,47 @@ function LoginForm(): ReactElement {
     let location: Location = useLocation();
     let from : To = (location.state as stateType).from.pathname || '/';
 
+    interface FormValues {
+        email: string,
+        password: string
+    };
+
+    const formik = useFormik({
+        initialValues : {
+            email: '',
+            password: ''
+        },
+
+        validate : (values) => {
+            const errors: FormValues ={} as FormValues;
+
+            if(!values.email) errors.email = 'Required';
+            else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = 'Invalid email address';
+            }
+
+            if(!values.password) errors.password = 'Required';
+
+            return errors;
+        },
+
+        onSubmit : values => {
+            console.log("And also Here")
+            auth.signin(values.email, () => {
+                navigate(from, { replace: true });
+            });
+        },
+    });
+
+
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        let formData = new FormData(e.currentTarget);
-        let email = formData.get("email") as string;
-
-        auth.signin(email, () => {
-            navigate(from, { replace: true });
-        });
+        console.log("Here");
+        formik.handleSubmit(e);
     }
       
     return (
+
+        
         <Form onSubmit={submitHandler}>
 
             <div className='form-top'>
@@ -34,12 +65,14 @@ function LoginForm(): ReactElement {
 
                 <Form.Group className='form-group'>
                     <Form.Label> Email </Form.Label>
-                    <Form.Control type="email" name="email" placeholder='Enter Registered Email Address' />
+                    <Form.Text className="muted error">{formik.errors.email}</Form.Text>
+                    <Form.Control type="email" name="email" placeholder='Enter Registered Email Address' onChange={formik.handleChange} value={formik.values.email}/>
                 </Form.Group>
 
                 <Form.Group className='form-group'>
                     <Form.Label htmlFor='password'> Password </Form.Label>
-                    <Form.Control type="password" name="password" placeholder='Enter Password' />
+                    <Form.Text className="muted error">{formik.errors.password}</Form.Text>
+                    <Form.Control type="password" name="password" placeholder='Enter Password' onChange={formik.handleChange} value={formik.values.password}/>
                     <Form.Text className='fgt-passwd'>Forgot Password? <a href="#">Click Here</a> </Form.Text>
                 </Form.Group>
 
@@ -63,6 +96,7 @@ function LoginForm(): ReactElement {
                 </Form.Group>
             </div>
         </Form>
+        
     )
 }
 

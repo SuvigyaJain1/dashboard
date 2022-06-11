@@ -18,9 +18,9 @@ let App = () => {
     <AuthProvider>
       <Routes>
         <Route path='/' element = { 
-          // <RequireAuth>
+          <RequireAuth>
             <Dashboard />
-          ///* </RequireAuth> */
+          </RequireAuth>
         } />
         <Route path='/login' element={<LoginPage />} />
       </Routes>
