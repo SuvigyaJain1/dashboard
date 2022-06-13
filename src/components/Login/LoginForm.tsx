@@ -42,7 +42,6 @@ function LoginForm(): ReactElement {
         },
 
         onSubmit : values => {
-            console.log("And also Here")
             auth.signin(values.email, () => {
                 navigate(from, { replace: true });
             });
@@ -51,7 +50,6 @@ function LoginForm(): ReactElement {
 
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-        console.log("Here");
         formik.handleSubmit(e);
     }
       
