@@ -1,9 +1,9 @@
-import userEvent from '@testing-library/user-event';
-import React, { ReactElement } from 'react'
-import { Button, Form, ListGroup } from 'react-bootstrap'
+import { useFormik } from 'formik';
+import React, { ReactElement } from 'react';
+import { Button, Form, ListGroup } from 'react-bootstrap';
 import { Location, NavigateFunction, To, useLocation, useNavigate } from 'react-router';
 import { AuthContextType, useAuth } from '../../Auth/Authentication';
-import { Formik, FormikConfig, useFormik } from 'formik';
+import * as Yup from 'yup';
 
 
 function LoginForm(): ReactElement {
@@ -28,18 +28,10 @@ function LoginForm(): ReactElement {
             password: ''
         },
 
-        validate : (values) => {
-            const errors: FormValues ={} as FormValues;
-
-            if(!values.email) errors.email = 'Required';
-            else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address';
-            }
-
-            if(!values.password) errors.password = 'Required';
-
-            return errors;
-        },
+        validationSchema : Yup.object({
+            email: Yup.string().email('Invalid email address').required('Required'),
+            password: Yup.string().required('Requried'),
+        }),
 
         onSubmit : values => {
             auth.signin(values.email, () => {
