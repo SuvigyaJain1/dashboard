@@ -1,6 +1,6 @@
 import React, { useState, useContext, ReactNode, Dispatch, SetStateAction, ReactElement } from 'react'
 import { useLocation, Navigate } from 'react-router';
-import { fakeAuthProvider } from './auth';
+import { fakeAuthProvider } from './FakeAuthProvider';
 
 export interface AuthContextType {
     user: string | undefined;
@@ -23,7 +23,7 @@ export default function AuthProvider( { children }: {children: ReactNode} ): Rea
     const [user, setUser] = useState<string|undefined>(undefined);
 
     let signin = (newUser: string, callback: VoidFunction): void => {
-        return fakeAuthProvider.signin(() => {
+        return fakeAuthProvider.signin(newUser, () => {
             setUser(newUser);
             callback();
         })
