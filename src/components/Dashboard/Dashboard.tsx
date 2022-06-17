@@ -52,12 +52,12 @@ function Dashboard() : ReactElement {
       <div className='col-md-3 col-bg-3 col-sm-12 sidebar'>
         <Sidebar items={items}/>
       </div>
-      <div className='col-md-9 col-bg-9 col-sm-12 right'>
-        <div className='nav'>
+      <div className='col-md-9 col-bg-9 col-sm-12 right container'>
+        <div className='nav row-md-2'>
           <NavBar />
           
         </div>
-        <div className='dashboard'>
+        <div className='dashboard row-md-10'>
           <DashboardContent />
         </div>
       </div>

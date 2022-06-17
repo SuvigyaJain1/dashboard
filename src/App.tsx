@@ -24,12 +24,16 @@ let App = () => {
 
   Axios.interceptors.request.use(config => {
     setLoaded(false);
+    return config;
+
   }, err => {
     return Promise.reject(err);
   })
   
-  Axios.interceptors.response.use(config => {
+  Axios.interceptors.response.use(res => {
     setLoaded(true)
+    return res;
+    
   }, err => {
     return Promise.reject(err);
   })
@@ -39,9 +43,9 @@ let App = () => {
             {loaded==false? <SpinnerOverlay/>:<></>}
         <Routes>
           <Route path='/' element = { 
-            <RequireAuth>
+            // <RequireAuth>
               <Dashboard />
-            </RequireAuth>
+            // </RequireAuth>
           } />
           <Route path='/login' element={<LoginPage />} />
         </Routes>

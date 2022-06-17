@@ -21,6 +21,9 @@ export const fakeAuthProvider  = {
         let payload: login_req = {
             user: user
         };
+        callback();
+        return;
+
         axios.post(url_login, payload)
         .then(res => {
             console.log(res.data)
@@ -42,7 +45,9 @@ export const fakeAuthProvider  = {
         let payload: login_req = {
             user: loggedInUser
         };
-
+        callback();
+        return;
+        
         axios.post(url_logout, payload)
         .then(res => {
             if(res.data.status == 200) {
